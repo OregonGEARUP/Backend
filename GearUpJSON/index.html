@@ -1,0 +1,164 @@
+ <!Doctype html>
+<html>
+    <head>
+        <title>HTML to JSON</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <!-- Stylesheet -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css" />
+        <!-- Javascript -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="js/moment.js"></script>
+        <script src="js/bootstrap-datetimepicker.js"></script>
+        <script src="js/conversion.js"></script>
+        <style>
+            .form-control{
+            height:34px;
+            border-width:1px;
+            }
+            .panel-default[name] {
+
+            }
+            [name=block].hide-btn [func=add-block] {
+              border: 1px solid #ff0000;
+                display: none;
+            }
+            [name=stages].hide-btn [func=add-stages] {
+                display: none;
+            }
+            [name=checkpoints].hide-btn [name=add-field] {
+                display: none;
+            }
+            [name=instances].hide-btn [func=add-instances] {
+                display: none;
+            }
+            .json-input {
+                position: fixed;
+                width: 100%;
+                z-index: 9999;
+            }
+            .block-form {
+                padding-top: 120px;
+            }
+            select.form-control {
+                height: 50px;
+            }
+            select.form-control option[value=""] {
+                --display: none;
+            }
+
+            div.blockColor{
+              border: 2px solid #FF6347;
+            }
+
+            div.stageColor{
+              border: 2px solid #228B22;
+            }
+
+            div.checkboxColor{
+              border: 2px solid #4682B4;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- End Main Box-->
+        <div class="container sample-template hidden">
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3" name="blocks">
+                    <div class="panel panel-default" name="block">
+                        <div class="panel-body blockColor">
+                          <div class="form-group">
+                              <button type="button" class="btn btn-default" func="add-block">+ Block</button>
+                          </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="date" placeholder="Date">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" disabled type="text" name="id" placeholder="id">
+                            </div>
+
+                            <div class="panel panel-default " name="stages">
+                                <div class="panel-body stageColor">
+                                  <div class="form-group">
+                                  <button type="button" class="btn btn-default" func="add-stages">+ Stages</button>
+                                  </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="title" placeholder="title - eg. Make a Plan" array="stages">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" disabled type="text" name="id" placeholder="id" array="stages">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" type="text" name="img" placeholder="img" array="stages">
+                                    </div>
+                                    <div class="panel panel-default" name="checkpoints">
+                                        <div class="panel-body checkboxColor">
+                                            <div class="dropdown">
+                                                <button type="button" class="btn btn-default dropdown-toggle " name="add-field" data-toggle="dropdown">+ Checkpoints
+                                                <span class="caret"></span></button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a href="#field" func="add-field" type="field">Field</a></li>
+                                                    <li><a href="#radio" func="add-field" type="radio">Radio</a></li>
+                                                    <li><a href="#checkbox" func="add-field" type="checkbox">CheckBox</a></li>
+                                                    <li><a href="#date" func="add-field" type="date">Date</a></li>
+                                                </ul>
+                                            </div><br>
+                                            <div class="form-group"><input class="form-control" type="text" name="title" placeholder="field..." array="checkpoints"></div>
+                                            <div class="form-group"><input class="form-control" type="text" name="description" placeholder="Description: This is an example of the field type checkpoint" array="checkpoints"></div>
+                                            <div class="form-group"><input class="form-control" type="text" name="moreInfo" placeholder="More Info: eg. https://google.com" array="checkpoints"></div>
+                                            <div class="form-group">
+                                                <select class="form-control" name="type" placeholder="Type" array="checkpoints">
+                                                    <option value="" disabled selected hidden>Select a Type</option>
+                                                    <option value="field">Field</option>
+                                                    <option value="radio">Radio</option>
+                                                    <option value="checkbox">CheckBox</option>
+                                                    <option value="date">Date</option>
+                                                </select>
+                                            </div>
+                                            <div class="panel panel-default" name="instances">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <button type="button" class="btn btn-default" name="add-instances" func="add-instances">+ Instances</button>
+                                                    </div>
+                                                    <div class="form-group"><input class="form-control" type="text" name="prompt" placeholder="prompt: Enter College" array="instances"></div>
+                                                    <div class="form-group"><input class="form-control" type="text" name="placeholder" placeholder="placeholder: brief on choice college" array="instances"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container json-input">
+        	<div class="row">
+        		<div class="col-xs-12 col-md-6 col-md-offset-3">
+        			<div class="panel panel-default">
+        				<div class='panel-body'>
+        					<div id="lowerBox" class="col-lg-6">
+					            <button id="addBtn">Add Data</button>
+					            <button id="dldBtn">Download</button>
+					        </div>
+					        <div class="form-group col-lg-6" style="margin-bottom: -100px">
+				                <input type="text" class="form-control" id="fileName" placeholder = "Enter FileName" />
+				            </div>
+        				</div>
+        			</div>
+        		</div>
+        	</div>
+        </div>
+        <div class="container block-form">
+        	<div class="row">
+        		<div class="col-xs-12 col-md-6 col-md-offset-3" name="blocks"></div>
+        	</div>
+        </div>
+    </body>
+</html>
