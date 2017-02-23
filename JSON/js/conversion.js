@@ -1,6 +1,7 @@
 var APP = {};
 APP.data = [];
 APP.sampleData = {
+	"blocktitle": "",
 	"date": "",
 	"id": "",
 	"stages": [{
@@ -111,6 +112,7 @@ $(document).ready(function() {
 			$block.find(".panel").remove();
 
 			$block.find("[name=date]").val(block.date);
+			$block.find("[name=blocktitle]").val(block.blocktitle);
 			$block.find("[name=id]").val(block.id);
 
 			for (var j = 0; j < block.stages.length; j++) {
