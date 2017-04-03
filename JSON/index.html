@@ -7,6 +7,7 @@
         <!-- Stylesheet -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="css/bootstrap-datetimepicker.css" />
+        <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css" />
         <!-- Javascript -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -35,6 +36,11 @@
             [name=instances].hide-btn [func=add-instances] {
                 display: none;
             }
+
+            [name=criteria].hide-btn [func=add-criteria] {
+                display: none;
+            }
+
             .json-input {
                 position: fixed;
                 width: 100%;
@@ -50,15 +56,15 @@
                 --display: none;
             }
 
-            div.blockColor{
+            .blockColor{
               border: 2px solid #FF6347;
             }
 
-            div.stageColor{
+            .stageColor{
               border: 2px solid #228B22;
             }
 
-            div.checkboxColor{
+            .checkboxColor{
               border: 2px solid #4682B4;
             }
         </style>
@@ -67,73 +73,161 @@
         <!-- End Main Box-->
         <div class="container sample-template hidden">
             <div class="row">
-                <div class="col-xs-12 col-md-6 col-md-offset-3" name="blocks">
+                <div class="col-xs-12 col-md-8 col-md-offset-0" name="blocks">
                     <div class="panel panel-default" name="block">
                         <div class="panel-body blockColor">
+                            <label for="" func="add-block" hidden ></label>
+
                           <div class="form-group">
-                              <button type="button" class="btn btn-default" func="add-block">+ Block</button>
+                              <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                              <small>BlockID: GearUp team can edit this. Default is b{some positive number}. This should be unique ID across every block.</small>
+                              <input class="form-control" type="text" name="id" placeholder="id">
                           </div>
+
                           <div class="form-group">
+                              <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                              <small>This is the "Main Title" of the block. It is short and appears on the header.</small>
                               <input class="form-control" type="text" name="blocktitle" placeholder="Block Title">
                           </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" name="date" placeholder="Date">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" disabled type="text" name="id" placeholder="id">
-                            </div>
 
                             <div class="panel panel-default " name="stages">
                                 <div class="panel-body stageColor">
-                                  <div class="form-group">
-                                  <button type="button" class="btn btn-default" func="add-stages">+ Stages</button>
-                                  </div>
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="title" placeholder="title - eg. Make a Plan" array="stages">
-                                    </div>
-                                    <div class="form-group">
-                                        <input class="form-control" disabled type="text" name="id" placeholder="id" array="stages">
-                                    </div>
+                                  <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                  <small>Stages appear as a list under block. List of various stages for a block.</small><br><br>
 
-                                    <div class="form-group">
-                                        <input class="form-control" type="text" name="img" placeholder="img" array="stages">
-                                    </div>
+
+                                  <div class="form-group">
+                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                    <small>StageID: GearUp team can edit this. Default is s{some positive number}. This should be unique ID across every stages.</small>
+                                      <input class="form-control" type="text" name="id" placeholder="id" array="stages">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                    <small>This is the stage's main title.</small>
+                                      <input class="form-control" type="text" name="title" placeholder="title - eg. Who are you?" array="stages">
+                                  </div>
+
+                                  <div class="form-group">
+                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                    <small>Enter image name. Eg: image.png</small>
+                                      <input class="form-control" type="text" name="img" placeholder="Image URL" array="stages">
+                                  </div>
+
                                     <div class="panel panel-default" name="checkpoints">
                                         <div class="panel-body checkboxColor">
-                                            <div class="dropdown">
-                                                <button type="button" class="btn btn-default dropdown-toggle " name="add-field" data-toggle="dropdown">+ Checkpoints
-                                                <span class="caret"></span></button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a href="#field" func="add-field" type="field">Field</a></li>
-                                                    <li><a href="#radio" func="add-field" type="radio">Radio</a></li>
-                                                    <li><a href="#checkbox" func="add-field" type="checkbox">CheckBox</a></li>
-                                                    <li><a href="#date" func="add-field" type="date">Date</a></li>
-                                                </ul>
-                                            </div><br>
-                                            <div class="form-group"><input class="form-control" type="text" name="title" placeholder="field..." array="checkpoints"></div>
-                                            <div class="form-group"><input class="form-control" type="text" name="description" placeholder="Description: This is an example of the field type checkpoint" array="checkpoints"></div>
-                                            <div class="form-group"><input class="form-control" type="text" name="moreInfo" placeholder="More Info: eg. https://google.com" array="checkpoints"></div>
+
                                             <div class="form-group">
-                                                <select class="form-control" name="type" placeholder="Type" array="checkpoints">
-                                                    <option value="" disabled selected hidden>Select a Type</option>
-                                                    <option value="field">Field</option>
+
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>Is this checkpoints required to move to next question? yes or no or descriptive text.</small> <br>
+
+                                              <label><input type="text" name="requiredCP" value="No" array="checkpoints" style="width: 30px"></label> &nbsp;&nbsp;
+
+
+                                            <br><br>
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>CheckPointID: GearUp team can edit this. Default is cp{some positive number}. This should be unique ID across every checkpoints.</small>
+                                            <input class="form-control" type="text" name="id" array="checkpoints">
+                                          </div>
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>Enter a short title. This will appear below header.</small>
+                                            <div class="form-group"><input class="form-control" type="text" name="title" placeholder="Eg: Special Circumstances" array="checkpoints"></div>
+
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>Enter a description for the checkpoint. </small>
+                                            <div class="form-group"><input class="form-control" type="text" name="description" placeholder="Eg: Do you have any circumstances that would make it harder to go to college?" array="checkpoints"></div>
+
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>Enter URL where users can find more infos.</small>
+                                            <div class="form-group"><input class="form-control" type="text" name="url" placeholder="eg. https://ebay.com" array="checkpoints"></div>
+
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>Enter descriptive text for URL. Eg: if url is https://ebay.com, then text can be "Shop with eBay!" </small>
+                                            <div class="form-group"><input class="form-control" type="text" name="urlText" placeholder="Shop with eBay!" array="checkpoints"></div>
+
+                                            <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                            <small>Does this checkpoint require uses to save anything? If yes, then select what type of checkpoint is this? Radio, Text Field, Checkbox or Date Picker. <i>Else you can skip this step including the instances.</i> </small>
+                                            <div class="form-group">
+                                                <select class="form-control checkboxColor" name="type" placeholder="Type" array="checkpoints">
+                                                    <option value="" disabled selected hidden>Select a checkpoint type:</option>
+                                                    <option value="info">Info Only</option>
+                                                    <option value="route">Route</option>
+                                                    <option value="field">Text Field</option>
                                                     <option value="radio">Radio</option>
                                                     <option value="checkbox">CheckBox</option>
-                                                    <option value="date">Date</option>
+                                                    <option value="dateOnly">Date Picker Only</option>
+                                                    <option value="dateAndText">Date Picker with Text</option>
                                                 </select>
                                             </div>
                                             <div class="panel panel-default" name="instances">
                                                 <div class="panel-body">
                                                     <div class="form-group">
-                                                        <button type="button" class="btn btn-default" name="add-instances" func="add-instances">+ Instances</button>
+                                                        <button type="button" class="btn btn-default checkboxColor" name="add-instances" func="add-instances">Add Instances (Fields in the checkpoints)</button>
                                                     </div>
-                                                    <div class="form-group"><input class="form-control" type="text" name="prompt" placeholder="prompt: Enter College" array="instances"></div>
-                                                    <div class="form-group"><input class="form-control" type="text" name="placeholder" placeholder="placeholder: brief on choice college" array="instances"></div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>InstancesID: GearUp team can edit this. Default is i{some positive number}. This should be unique ID across every instances.</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="id" array="instances"></div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>This is the actual text that appears next to the checkpoints. Usually single letter.</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="prompt" placeholder="Eg: I am or have been in foster care." array="instances"></div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>This is an additional text, in smaller and lighter font. Eg: </small> <small style="font-family:'verdana'; font-size: 10px; color: #bbb">Select if you were or currently in foster care</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="placeholder" placeholder="Eg: Select if you were or currently in foster care" array="instances"></div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>Is this a decision making instance? enter where to go next?</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="routeKey" placeholder="Eg:b1_s2_cp1" array="instances"></div>
                                                 </div>
                                             </div>
+
+                                            <div class="panel panel-default" name="criteria">
+                                                <div class="panel-body">
+                                                    <div class="form-group">
+                                                        <button type="button" class="btn btn-default checkboxColor" name="add-critera" func="add-criteria">Add criteria</button>
+                                                    </div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>criteriaID: GearUp team can edit this. Default is c{some positive number}. This should be unique ID across every criteria.</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="id" array="criteria"></div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>Key</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="key" placeholder="The Key" array="criteria"></div>
+
+                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                                    <small>Value</small>
+                                                    <div class="form-group"><input class="form-control" type="text" name="value" placeholder="The Value" array="criteria"></div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <br>
+                                        <div class="dropdown">
+                                            <button type="button" class="btn btn-default dropdown-toggle checkboxColor" name="add-field" data-toggle="dropdown">Add Additional Checkpoint &nbsp;
+                                            <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                              <li><a href="#info" func="add-field" type="info">Info Only</a></li>
+                                              <li><a href="#route" func="add-field" type="route">Route</a></li>
+                                                <li><a href="#field" func="add-field" type="field">Text Field</a></li>
+                                                <li><a href="#radio" func="add-field" type="radio">Radio</a></li>
+                                                <li><a href="#checkbox" func="add-field" type="checkbox">CheckBox</a></li>
+                                                <li><a href="#dateOnly" func="add-field" type="dateOnly">Date Picker Only</a></li>
+                                                <li><a href="#dateAndText" func="add-field" type="dateAndText">Date Picker with Text</a></li>
+                                            </ul>
                                         </div>
                                     </div>
+
+
                                 </div>
+                                <br>
+                                <button type="button" class="btn btn-default stageColor" func="add-stages">Add Additional Stage</button>
+
+
                             </div>
                         </div>
                     </div>
@@ -151,7 +245,7 @@
 					            <button id="dldBtn">Download</button>
 					        </div>
 					        <div class="form-group col-lg-6" style="margin-bottom: -100px">
-				                <input type="text" class="form-control" id="fileName" placeholder = "Enter FileName" />
+				                <input type="text" class="form-control" id="fileName" placeholder = "Enter a block filename" />
 				            </div>
         				</div>
         			</div>
