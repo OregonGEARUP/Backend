@@ -18,14 +18,14 @@ APP.sampleData = {
 							"instances": [{
 								"id": "",
 								"prompt": "",
-								"placeholder": "",
-								"routeKey": ""
+								"placeholder": ""
 							}],
 								"criteria": [{
 									"id": "",
 									"key": "",
 									"value": ""
-}]
+							}],
+							"routeFileName": ""
 		}]
 	}],
 	 "version": "1.0"
@@ -172,6 +172,8 @@ $(document).ready(function() {
 					$checkpoints.find("[name=url]").val(checkpoints.url);
 					$checkpoints.find("[name=urlText]").val(checkpoints.urlText);
 					$checkpoints.find("[name=type]").val(checkpoints.type);
+					$checkpoints.find("[name=routeFileName]").val(checkpoints.routeFileName);
+
 
 
 					for (var l = 0; l < checkpoints.instances.length; l++) {
@@ -185,7 +187,6 @@ $(document).ready(function() {
 						$instances.find("[name=id]").val(instances.id);
 						$instances.find("[name='prompt']").val(instances["prompt"]);
 						$instances.find("[name='placeholder']").val(instances["placeholder"]);
-						$instances.find("[name='routeKey']").val(instances["routeKey"]);
 
 						$checkpoints.find("> .panel-body").append($instances);
 					}
@@ -200,8 +201,8 @@ $(document).ready(function() {
 
 					  // $criteria.find("[name='disableChecked']").val(criteria["disableChecked"]);
 					  $criteria.find("[name=id]").val(criteria.id);
-					  $criteria.find("[name='key']").val(criteria["prompt"]);
-					  $criteria.find("[name='value']").val(criteria["placeholder"]);
+					  $criteria.find("[name='key']").val(criteria["key"]);
+					  $criteria.find("[name='value']").val(criteria["value"]);
 
 					  $checkpoints.find("> .panel-body").append($criteria);
 					}
@@ -246,6 +247,9 @@ $(document).ready(function() {
 					$checkpoints.find("[name=url]").val(checkpoints.url);
 					$checkpoints.find("[name=urlText]").val(checkpoints.urlText);
 					$checkpoints.find("[name=type]").val(checkpoints.type);
+					$checkpoints.find("[name=routeFileName]").val(checkpoints.routeFileName);
+
+
 					var checkpointVal = $checkpoints.find("[name=type]").val(checkpoints.type);
 
 					console.log("checkpoints val:",checkpointVal);
@@ -259,7 +263,6 @@ $(document).ready(function() {
 						$instances.find("[name=id]").val(instances.id);
 						$instances.find("[name='prompt']").val(instances["prompt"]);
 						$instances.find("[name='placeholder']").val(instances["placeholder"]);
-						$instances.find("[name='routeKey']").val(instances["routeKey"]);
 					}
 
 					for (var l = 0; l < checkpoints.criteria.length; l++) {
@@ -268,8 +271,8 @@ $(document).ready(function() {
 					  console.log("criteria:", $criteria );
 
 					  $criteria.find("[name=id]").val(criteria.id);
-					  $criteria.find("[name='key']").val(criteria["prompt"]);
-					  $criteria.find("[name='value']").val(criteria["placeholder"]);
+					  $criteria.find("[name='key']").val(criteria["key"]);
+					  $criteria.find("[name='value']").val(criteria["value"]);
 					}
 				}
 			}

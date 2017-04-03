@@ -160,6 +160,7 @@
                                                     <option value="dateAndText">Date Picker with Text</option>
                                                 </select>
                                             </div>
+
                                             <div class="panel panel-default" name="instances">
                                                 <div class="panel-body">
                                                     <div class="form-group">
@@ -177,10 +178,6 @@
                                                     <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
                                                     <small>This is an additional text, in smaller and lighter font. Eg: </small> <small style="font-family:'verdana'; font-size: 10px; color: #bbb">Select if you were or currently in foster care</small>
                                                     <div class="form-group"><input class="form-control" type="text" name="placeholder" placeholder="Eg: Select if you were or currently in foster care" array="instances"></div>
-
-                                                    <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
-                                                    <small>Is this a decision making instance? enter where to go next?</small>
-                                                    <div class="form-group"><input class="form-control" type="text" name="routeKey" placeholder="Eg:b1_s2_cp1" array="instances"></div>
                                                 </div>
                                             </div>
 
@@ -195,17 +192,24 @@
                                                     <div class="form-group"><input class="form-control" type="text" name="id" array="criteria"></div>
 
                                                     <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
-                                                    <small>Key</small>
+                                                    <small>Key. eg: b2_female_s1_cp1_i2 </small>
                                                     <div class="form-group"><input class="form-control" type="text" name="key" placeholder="The Key" array="criteria"></div>
 
                                                     <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
-                                                    <small>Value</small>
+                                                    <small>Value. eg: 0 or 1</small>
                                                     <div class="form-group"><input class="form-control" type="text" name="value" placeholder="The Value" array="criteria"></div>
-
                                                 </div>
                                             </div>
 
+
                                         </div>
+                                        <br>
+                                        <div class="criteria" style="margin: 10px">
+                                          <i class="fa fa-info-circle" style = "color:#337ab7" aria-hidden="true"></i>
+                                          <small><b>Route Filename: </b>Where to go next? eg: filename.json</small>
+                                          <input class="form-control" type="text" name="routeFileName" array="checkpoints">
+                                        </div>
+
                                         <br>
                                         <div class="dropdown">
                                             <button type="button" class="btn btn-default dropdown-toggle checkboxColor" name="add-field" data-toggle="dropdown">Add Additional Checkpoint &nbsp;
